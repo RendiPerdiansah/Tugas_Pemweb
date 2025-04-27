@@ -90,6 +90,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\UserController;
+
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
+use App\Http\Middleware\DosenMiddleware;
+use App\Http\Middleware\MahasiswaMiddleware;
 
 Route::get('/', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -97,15 +103,20 @@ Route::get('/register', [AuthController::class, 'registerPage']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
 });
 
-Route::middleware(['auth', 'mahasiswa'])->group(function () {
+Route::middleware([MahasiswaMiddleware::class])->group(function () {
     Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 
-Route::middleware(['auth', 'dosen'])->group(function () {
+Route::middleware([UserMiddleware::class])->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+});
+
+Route::middleware([DosenMiddleware::class])->group(function () {
     Route::get('/dosen', [DosenController::class, 'index']);
     Route::get('/dosen/print', [DosenController::class, 'print'])->name('dosen.print');
 });
+

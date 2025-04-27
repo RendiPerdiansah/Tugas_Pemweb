@@ -1,5 +1,5 @@
 @section('title')
-dosen
+mahasiswa
 @endsection
 @extends('layout.v_tamplate')
 @section('page')

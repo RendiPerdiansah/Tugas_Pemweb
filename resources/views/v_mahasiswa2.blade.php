@@ -3,7 +3,7 @@ Dosen
 @endsection
 @extends('layout.v_tamplate')
 @section('page')
-Halaman detail dosen
+Halaman detail mahasiswa
 @endsection
 @section('content')
 <div class="card card-primary">
