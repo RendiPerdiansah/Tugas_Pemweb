@@ -120,3 +120,4 @@ Route::middleware([DosenMiddleware::class])->group(function () {
     Route::get('/dosen/print', [DosenController::class, 'print'])->name('dosen.print');
 });
 
+Route::view('/home','home');

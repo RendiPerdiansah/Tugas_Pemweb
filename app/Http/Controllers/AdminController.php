@@ -13,6 +13,6 @@ class AdminController extends Controller
             Mahasiswa::where('jurusan', 'SI')->count(),
             Mahasiswa::where('jurusan', 'MI')->count(),
         ];
-        return view('admin.chart', compact('labels', 'data'));
+        return view('admin.v_admin', compact('labels', 'data'));
     }
 }
