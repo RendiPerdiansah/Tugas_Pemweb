@@ -54,97 +54,106 @@
     </div>
   
     <!-- Nav Item - Mahasiswa -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMahasiswa"
-            aria-expanded="true" aria-controls="collapseMahasiswa">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Mahasiswa</span>
-        </a>
-        <div id="collapseMahasiswa" class="collapse" aria-labelledby="headingMahasiswa" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="{{ url('mahasiswa') }}">Mahasiswa</a>
-            </div>
+    @if ($level == 1 || $level == 3)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMahasiswa">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Mahasiswa</span>
+    </a>
+    <div id="collapseMahasiswa" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('mahasiswa') }}">Mahasiswa</a>
         </div>
-    </li>
+    </div>
+</li>
+@endif
   
-    <!-- Nav Item - Dosen -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDosen"
-            aria-expanded="true" aria-controls="collapseDosen">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Kelola Data Dosen</span>
-        </a>
-        <div id="collapseDosen" class="collapse" aria-labelledby="headingDosen" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ url('dosen') }}">Dosen</a>
-            </div>
+    <!-- Dosen: hanya Admin & Dosen -->
+@if ($level == 1 || $level == 4)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDosen">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Kelola Data Dosen</span>
+    </a>
+    <div id="collapseDosen" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('dosen') }}">Dosen</a>
         </div>
-    </li>
-  
-    <!-- Nav Item - User -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
-            aria-expanded="true" aria-controls="collapseUser">
-            <i class="fas fa-fw fa-user"></i>
-            <span>User</span>
-        </a>
-        <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ url('user') }}">User</a>
-            </div>
+    </div>
+</li>
+@endif
+
+
+@if ($level == 2 || $level == 1)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser">
+        <i class="fas fa-fw fa-user"></i>
+        <span>User</span>
+    </a>
+    <div id="collapseUser" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('user') }}">User</a>
         </div>
-    </li>
-  
-    <!-- Nav Item - About -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbout"
-            aria-expanded="true" aria-controls="collapseAbout">
-            <i class="fas fa-fw fa-info-circle"></i>
-            <span>About</span>
-        </a>
-        <div id="collapseAbout" class="collapse" aria-labelledby="headingAbout" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ url('about') }}">About</a>
-            </div>
+    </div>
+</li>
+@endif
+
+<!-- About: semua level -->
+@if ($level == 1 || $level == 1)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbout">
+        <i class="fas fa-fw fa-info-circle"></i>
+        <span>About</span>
+    </a>
+    <div id="collapseAbout" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('about') }}">About</a>
         </div>
-    </li>
-  
-    <!-- Nav Item - Chart -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChart"
-            aria-expanded="true" aria-controls="collapseChart">
-            <i class="fas fa-fw fa-chart-bar"></i>
-            <span>Chart</span>
-        </a>
-        <div id="collapseChart" class="collapse" aria-labelledby="headingChart" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ url('chart') }}">Chart</a>
-            </div>
+    </div>
+</li>
+@endif
+
+<!-- Chart: Admin & Dosen -->
+@if ($level == 1)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChart">
+        <i class="fas fa-fw fa-chart-bar"></i>
+        <span>Chart</span>
+    </a>
+    <div id="collapseChart" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('chart') }}">Chart</a>
         </div>
-    </li>
-  
-    <!-- Nav Item - Invoice -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvoice"
-            aria-expanded="true" aria-controls="collapseInvoice">
-            <i class="fas fa-fw fa-file-invoice"></i>
-            <span>Invoice</span>
-        </a>
-        <div id="collapseInvoice" class="collapse" aria-labelledby="headingInvoice" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="{{ url('invoice') }}">Invoice</a>
-            </div>
+    </div>
+</li>
+@endif
+
+<!-- Invoice: Admin & User -->
+@if ($level == 1)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInvoice">
+        <i class="fas fa-fw fa-file-invoice"></i>
+        <span>Invoice</span>
+    </a>
+    <div id="collapseInvoice" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('invoice') }}">Invoice</a>
         </div>
-    </li>
+    </div>
+</li>
+@endif
   
     <!-- Divider -->
     <hr class="sidebar-divider">
+    <li class="nav-item">
+        {{-- <form method="POST" action="{{ route('logout') }}"> --}}
+            @csrf
+            <button type="submit" class="nav-link btn btn-link text-left text-white w-100">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </form>
+    </li>
   
   </ul>
   
