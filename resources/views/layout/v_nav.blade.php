@@ -62,7 +62,7 @@
     </a>
     <div id="collapseMahasiswa" class="collapse">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('mahasiswa') }}">Mahasiswa</a>
+            <a class="collapse-item" href="{{ url('dashboardmahasiswa') }}">Mahasiswa</a>
         </div>
     </div>
 </li>
@@ -77,7 +77,7 @@
     </a>
     <div id="collapseDosen" class="collapse">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('dosen') }}">Dosen</a>
+            <a class="collapse-item" href="{{ url('datadosen') }}">Dosen</a>
         </div>
     </div>
 </li>
@@ -92,7 +92,7 @@
     </a>
     <div id="collapseUser" class="collapse">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('user') }}">User</a>
+            <a class="collapse-item" href="{{ url('dashboarduser') }}">User</a>
         </div>
     </div>
 </li>

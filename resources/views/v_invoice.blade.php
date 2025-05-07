@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h1 class="card-title">HALAMAN USER</h1>
+        <h1 class="card-title">HALAMAN INVOICE</h1>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -16,7 +16,6 @@
         <H3>Title</H3>
     </div>
     <div class="card-body">
-        Start Creating Your Amazing Application!
         
     </div>
     <!-- /.card-body -->

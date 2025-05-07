@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h1 class="card-title">HALAMAN USER</h1>
+        <h1 class="card-title">HALAMAN MAHASISWA</h1>
 
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">

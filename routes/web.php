@@ -67,13 +67,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', [c_home::class, 'index']);
 // Route::get('/about', [c_home::class, 'about']);
 // Route::get('/about2/{id}', [c_home::class, 'about2']);
-// Route::get('/dosen', [c_dosen::class, 'index'])->name('dosen');
-// Route::get('/dosen/detail/{id_dosen}', [c_dosen::class, 'detail']);
-// Route::get('/dosen/add', [c_dosen::class, 'add']);
-// Route::post('/dosen/insert', [c_dosen::class, 'insert']);
-// Route::get('/dosen/edit/{id_dosen}', [c_dosen::class, 'edit']);
-// Route::post('/dosen/update/{id_dosen}', [c_dosen::class, 'update']);
-// Route::get('/dosen/delete/{id_dosen}', [c_dosen::class, 'delete']);
+Route::get('/datadosen', [c_dosen::class, 'index'])->name('dosen');
+Route::get('/datadosen/detail/{id_dosen}', [c_dosen::class, 'detail']);
+Route::get('/datadosen/add', [c_dosen::class, 'add']);
+Route::post('/datadosen/insert', [c_dosen::class, 'insert']);
+Route::get('/datadosen/edit/{id_dosen}', [c_dosen::class, 'edit']);
+Route::post('/datadosen/update/{id_dosen}', [c_dosen::class, 'update']);
+Route::get('/datadosen/delete/{id_dosen}', [c_dosen::class, 'delete']);
 // Route::get('/user', [c_user::class, 'index']);
 // Route::get('/register', [c_register::class, 'index']);
 // Route::get('/mahasiswa', [c_mahasiswa::class, 'index'])->name('mahasiswa');
@@ -117,7 +117,47 @@ Route::middleware([UserMiddleware::class])->group(function () {
 
 Route::middleware([DosenMiddleware::class])->group(function () {
     Route::get('/dosen', [DosenController::class, 'index']);
-    Route::get('/dosen/print', [DosenController::class, 'print'])->name('dosen.print');
+    
 });
 
 Route::view('/home','home');
+Route::view('/about','v_about');
+Route::view('/dashboarduser','v_user');
+Route::view('/dashboardmahasiswa','mahasiswa');
+Route::view('/chart','v_chart');
+Route::view('/invoice','v_invoice');
+
+
+//Update Route
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ProdiController;
+
+//Dosen
+// Route::get('/dosen', [DosenController::class, 'index']);
+// Route::get('/dosen/create', [DosenController::class, 'create']);
+// Route::post('/dosen', [DosenController::class, 'store']);
+// Route::get('/dosen/{nip}/edit', [DosenController::class, 'edit']);
+// Route::put('/dosen/{nip}', [DosenController::class, 'update']);
+// Route::delete('/dosen/{nip}', [DosenController::class, 'destroy']);
+//Mahasiswa
+// Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+// Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+// Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+// Route::get('/mahasiswa/{nim}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+// Route::put('/mahasiswa/{nim}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+// Route::delete('/mahasiswa/{nim}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+// //Jurusan
+// Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
+// Route::get('/jurusan/create', [JurusanController::class, 'create'])->name('jurusan.create');
+// Route::post('/jurusan', [JurusanController::class, 'store'])->name('jurusan.store');
+// Route::get('/jurusan/{id}/edit', [JurusanController::class, 'edit'])->name('jurusan.edit');
+// Route::put('/jurusan/{id}', [JurusanController::class, 'update'])->name('jurusan.update');
+// Route::delete('/jurusan/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
+// //prodi
+// Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi.index');
+// Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi.create');
+// Route::post('/prodi', [ProdiController::class, 'store'])->name('prodi.store');
+// Route::get('/prodi/{id}/edit', [ProdiController::class, 'edit'])->name('prodi.edit');
+// Route::put('/prodi/{id}', [ProdiController::class, 'update'])->name('prodi.update');
+// Route::delete('/prodi/{id}', [ProdiController::class, 'destroy'])->name('prodi.destroy');
+

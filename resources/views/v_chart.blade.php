@@ -12,44 +12,17 @@
                 <i class="fas fa-times"></i></button>
         </div>
     </div>
-
     <div class="card-body">
-        <h3>Dashboard</h3>
-        <canvas id="mahasiswaChart" width="400" height="150"></canvas>
+        <H3>Title</H3>
     </div>
-
-    <div class="card-footer">
+    <div class="card-body">
+       
+        
+    </div>
+    <!-- /.card-body -->
+     <div class="card-footer">
         Footer
     </div>
+    <!-- /.card-footer-->
 </div>
-@endsection
-
-@section('scripts')
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('mahasiswaChart').getContext('2d');
-
-    const mahasiswaChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($labels) !!},
-            datasets: [{
-                label: 'Jumlah Mahasiswa per Prodi',
-                data: {!! json_encode($data) !!},
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 @endsection

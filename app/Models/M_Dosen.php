@@ -8,28 +8,67 @@ use Illuminate\Support\Facades\DB;
 
 class M_Dosen extends Model
 {
-    public function alldata()
+    use HasFactory;
+
+    protected $table = 'tb_dosen';
+    protected $primaryKey = 'nip';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    // Ambil semua data dosen
+    public function allData()
     {
-        return DB::table('tb_dosen')->get();
+        return DB::table($this->table)
+            ->leftJoin('jurusan', 'tb_dosen.id_jurusan', '=', 'jurusan.id_jurusan')
+            ->leftJoin('prodi', 'tb_dosen.id_prodi', '=', 'prodi.id_prodi')
+            ->select(
+                'tb_dosen.*',
+                'jurusan.nama_jurusan as nama_jurusan',
+                'prodi.nama_prodi as nama_prodi'
+            )
+            ->get();
     }
 
-    public function detaildata($id_dosen)
+    // Ambil data detail berdasarkan NIP
+    public function detailData($nip)
     {
-        return DB::table('tb_dosen')->where('id_dosen', $id_dosen)->first();
+        return DB::table($this->table)
+            ->leftJoin('jurusan', 'tb_dosen.id_jurusan', '=', 'jurusan.id_jurusan')
+            ->leftJoin('prodi', 'tb_dosen.id_prodi', '=', 'prodi.id_prodi')
+            ->select(
+                'tb_dosen.*',
+                'jurusan.nama_jurusan as nama_jurusan',
+                'prodi.nama_prodi as nama_prodi'
+            )
+            ->where('tb_dosen.nip', $nip)
+            ->first();
     }
 
+    // Tambah data
     public function addData($data)
     {
-        DB::table('tb_dosen')->insert($data);
+        DB::table($this->table)->insert($data);
     }
 
-    public function editData($id_dosen, $data)
+    // Edit data
+    public function editData($nip, $data)
     {
-        DB::table('tb_dosen')->where('id_dosen', $id_dosen)->update($data);
+        DB::table($this->table)->where('nip', $nip)->update($data);
     }
 
-    public function deleteData($id_dosen)
+    // Hapus data
+    public function deleteData($nip)
     {
-        DB::table('tb_dosen')->where('id_dosen', $id_dosen)->delete();
-    } 
+        DB::table($this->table)->where('nip', $nip)->delete();
+    }
+
+    // Optional: Ambil ID max jika pakai id_dosen otomatis
+    public function getMaxIdDosenNumber()
+    {
+        $max = DB::table($this->table)
+            ->select(DB::raw('MAX(CAST(SUBSTRING(id_dosen, 4) AS UNSIGNED)) as max_number'))
+            ->first();
+
+        return $max->max_number ?? 0;
+    }
 }

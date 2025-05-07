@@ -1,36 +1,31 @@
 <?php
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-    use Illuminate\Http\Request;
-    use App\Models\M_Dosen;
+use Illuminate\Http\Request;
+use App\Models\M_Dosen;
 use Illuminate\Support\Facades\Redirect;
-use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\File;
 
-    class c_dosen extends Controller
+class c_dosen extends Controller
+{
+    protected $dosen;
+
+    public function __construct(M_Dosen $dosen)
     {
-       public function __construct()
-       {
-           $this->M_Dosen = new M_Dosen();
-       }
+        $this->dosen = $dosen;
+    }
 
-       public function index()
-       {
-         $data = [
-              'dosen' => $this->M_Dosen->alldata(),
-         ];
-         return view('v_dosen',$data);
-        }
-
-    public function detail($id_dosen)
+    public function index()
     {
-       if(!$this->M_Dosen->detaildata($id_dosen)){
-           abort(404);
-       }
-         $data = [
-              'dosen' => $this->M_Dosen->detaildata($id_dosen),
-         ];
-            return view('v_dosen2', $data);
+        $data = ['dosen' => $this->dosen->allData()];
+        return view('v_dosen', $data);
+    }
+
+    public function detail($nip)
+    {
+        $data = ['dosen' => $this->dosen->detailData($nip)];
+        return view('v_dosen2', $data);
     }
 
     public function add()
@@ -38,98 +33,78 @@ use PhpParser\Node\Stmt\Return_;
         return view('v_adddosen');
     }
 
-    public function insert()
+    public function insert(Request $request)
     {
-        Request()->validate([
-            'nip' => 'required|unique:tb_dosen,nip|min:17|max:18',
+        $request->validate([
+            'nip' => 'required|unique:dosen,nip',
             'nama_dosen' => 'required',
             'mata_kuliah' => 'required',
-            'foto_dosen' => 'required|mimes:jpg,jpeg,png,bmp|max:1024',
-        ],[//ini adalah konversi keterangan validasi form NIP dalam bahasa indonesia
-            'nip.required' => 'NIP wajib diisi !',
-            'nip.unique' => 'NIP ini sudah terdaftar di database !',
-            'nip.min' => 'NIP minimal 17 karakter',
-            'nip.max' => 'NIP maksimal 18 karakter',
-            'nama_dosen.required' => 'Nama Dosen wajib di isi !',
-            'mata_kuliah.required' => 'Mata Kuliah wajib di isi !',
-            'foto_dosen.required' => 'Foto Dosen wajib di isi !',
+            'foto_dosen' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
-        //jika validasi tidak ada maka lakukan simpan data
-        //upload gambar/foto
-        $file = Request()->foto_dosen;
-        $fileName = Request()->nip.'.'.$file->extension();
-        $file->move(public_path('foto_dosen'), $fileName);
+
+        // Upload foto
+        $file = $request->file('foto_dosen');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('foto_dosen'), $filename);
 
         $data = [
-            'nip' => Request()->nip,
-            'nama_dosen' => Request()->nama_dosen,
-            'mata_kuliah' => Request()->mata_kuliah,
-            'foto_dosen' => $fileName,
+            'nip' => $request->nip,
+            'nama_dosen' => $request->nama_dosen,
+            'mata_kuliah' => $request->mata_kuliah,
+            'foto_dosen' => $filename,
         ];
-        $this->M_Dosen->addData($data);
-        Return Redirect()->route('dosen')->with('pesan','Data Berhasil Ditambahkan !');
+
+        $this->dosen->addData($data);
+        return redirect()->route('dosen')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function edit($id_dosen)
+    public function edit($nip)
     {
-        if(!$this->M_Dosen->detaildata($id_dosen)){
-            abort(404);
-        }
-        $data = [
-            'dosen' => $this->M_Dosen->detaildata($id_dosen),
-        ];
+        $data = ['dosen' => $this->dosen->detailData($nip)];
         return view('v_editdosen', $data);
     }
 
-    public function update($id_dosen)
+    public function update(Request $request, $nip)
     {
-        Request()->validate([
-            'nip' => 'required|min:17|max:18',
+        $request->validate([
             'nama_dosen' => 'required',
             'mata_kuliah' => 'required',
-            'foto_dosen' => 'mimes:jpg,jpeg,png,bmp|max:1024',
-        ],[//ini adalah konversi keterangan validasi form NIP dalam bahasa indonesia
-            'nip.required' => 'NIP wajib diisi !',
-            'nip.min' => 'NIP minimal 17 karakter',
-            'nip.max' => 'NIP maksimal 18 karakter',
-            'nama_dosen.required' => 'Nama Dosen wajib di isi !',
-            'mata_kuliah.required' => 'Mata Kuliah wajib di isi !',
+            'foto_dosen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
-        //jika validasi tidak ada maka lakukan simpan data
-        if (Request()->foto_dosen <> "") {
-            //jika ganti gambar/foto
-            $file = Request()->foto_dosen;
-            $fileName = Request()->nip.'.'.$file->extension();
-            $file->move(public_path('foto_dosen'), $fileName);
 
-            $data = [
-                'nip' => Request()->nip,
-                'nama_dosen' => Request()->nama_dosen,
-                'mata_kuliah' => Request()->mata_kuliah,
-                'foto_dosen' => $fileName,
-            ];
-            $this->M_Dosen->editData($id_dosen, $data);
-    }
-        else {
-            //jika tidak ganti gambar/foto
-            $data = [
-            'nip' => Request()->nip,
-            'nama_dosen' => Request()->nama_dosen,
-            'mata_kuliah' => Request()->mata_kuliah, 
-            ];
-            $this->M_Dosen->editData($id_dosen, $data);
+        $dosen = $this->dosen->detailData($nip);
+
+        // Update foto jika ada file baru
+        if ($request->hasFile('foto_dosen')) {
+            if (File::exists(public_path('foto_dosen/' . $dosen->foto_dosen))) {
+                File::delete(public_path('foto_dosen/' . $dosen->foto_dosen));
+            }
+
+            $file = $request->file('foto_dosen');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('foto_dosen'), $filename);
+        } else {
+            $filename = $dosen->foto_dosen;
         }
-        return redirect()->route('dosen')->with('pesan','Data Berhasil Diubah !');
+
+        $data = [
+            'nama_dosen' => $request->nama_dosen,
+            'mata_kuliah' => $request->mata_kuliah,
+            'foto_dosen' => $filename,
+        ];
+
+        $this->dosen->editData($nip, $data);
+        return redirect()->route('dosen')->with('pesan', 'Data berhasil diupdate!');
     }
 
-    public function delete($id_dosen)
+    public function delete($nip)
     {
-        //hapus atau delete foto
-        $dosen = $this->M_Dosen->detaildata($id_dosen);
-        if ($dosen->foto_dosen <> "") {
-            unlink(public_path('foto_dosen').'/'.$dosen->foto_dosen);
+        $dosen = $this->dosen->detailData($nip);
+        if (File::exists(public_path('foto_dosen/' . $dosen->foto_dosen))) {
+            File::delete(public_path('foto_dosen/' . $dosen->foto_dosen));
         }
-        $this->M_Dosen->deleteData($id_dosen);
-        return redirect()->route('dosen')->with('pesan','Data Berhasil Dihapus !');
+
+        $this->dosen->deleteData($nip);
+        return redirect()->route('dosen')->with('pesan', 'Data berhasil dihapus!');
     }
 }
