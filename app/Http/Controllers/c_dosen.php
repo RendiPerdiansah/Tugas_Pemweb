@@ -41,6 +41,7 @@ class c_dosen extends Controller
     public function insert(Request $request)
     {
         $request->validate([
+            'nidn' => 'required|unique:tb_dosen,nidn',
             'nip' => 'required|unique:tb_dosen,nip',
             'nama_dosen' => 'required',
             'jk_dosen' => 'required',
@@ -49,18 +50,13 @@ class c_dosen extends Controller
             'foto_dosen' => 'required|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        // Generate new id_dosen
-        $maxIdNumber = $this->dosen->getMaxIdDosenNumber();
-        $newIdNumber = $maxIdNumber + 1;
-        $newIdDosen = 'DSN' . str_pad($newIdNumber, 5, '0', STR_PAD_LEFT);
-
         // Upload foto
         $file = $request->file('foto_dosen');
         $filename = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('foto_dosen'), $filename);
 
         $data = [
-            'id_dosen' => $newIdDosen,
+            'nidn' => $request->nidn,
             'nip' => $request->nip,
             'nama_dosen' => $request->nama_dosen,
             'jk_dosen' => $request->jk_dosen,

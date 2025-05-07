@@ -24,16 +24,26 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="id_dosen">ID Dosen</label>
-                            <input type="text" name="id_dosen" class="form-control" id="id_dosen" 
-                                   placeholder="ID Dosen akan dibuat otomatis" value="Auto-generated" readonly>
+                            <label for="nidn">NIDN</label>
+                            <input type="text" name="nidn" class="form-control" id="nidn" 
+                                   placeholder="Masukan NIDN" value="{{ old('nidn') }}">
                             <div class="text-danger">
-                                @error('id_dosen')
+                                @error('nidn')
                                     {{ $message }}
                                 @enderror
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="nidn">NIDN</label>
+                            <input type="text" name="nidn" class="form-control" id="nidn" 
+                                   placeholder="Masukan NIDN" value="{{ old('nidn') }}" maxlength="20">
+                            <div class="text-danger">
+                                @error('nidn')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="nip">NIP</label>
                             <input type="text" name="nip" class="form-control" id="nip" 
