@@ -19,7 +19,7 @@
                     <h3 class="card-title">Form Edit Dosen</h3>
                 </div>
 
-                <form action="/datadosen/update/{{ $dosen->id_dosen }}" method="POST" enctype="multipart/form-data">
+                <form action="/datadosen/update/{{ $dosen->nip }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
 
@@ -39,11 +39,51 @@
                             </div>
                         </div>
 
+                        {{-- Removed Mata Kuliah field as it does not exist --}}
+                        {{--
                         <div class="form-group">
                             <label for="mata_kuliah">Mata Kuliah</label>
                             <input type="text" name="mata_kuliah" class="form-control" id="mata_kuliah" placeholder="Masukkan Mata Kuliah" value="{{ $dosen->mata_kuliah }}">
                             <div class="text-danger">
                                 @error('mata_kuliah') {{ $message }} @enderror
+                            </div>
+                        </div>
+                        --}}
+
+                        <div class="form-group">
+                            <label for="jk_dosen">Jenis Kelamin</label>
+                            <select name="jk_dosen" id="jk_dosen" class="form-control">
+                                <option value="Laki-laki" {{ $dosen->jk_dosen == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="Perempuan" {{ $dosen->jk_dosen == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                            <div class="text-danger">
+                                @error('jk_dosen') {{ $message }} @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_jurusan">Jurusan</label>
+                            <select name="id_jurusan" id="id_jurusan" class="form-control">
+                                <option value="">-- Pilih Jurusan --</option>
+                                @foreach($jurusan as $j)
+                                    <option value="{{ $j->id_jurusan }}" {{ $dosen->id_jurusan == $j->id_jurusan ? 'selected' : '' }}>{{ $j->nama_jurusan }}</option>
+                                @endforeach
+                            </select>
+                            <div class="text-danger">
+                                @error('id_jurusan') {{ $message }} @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_prodi">Program Studi</label>
+                            <select name="id_prodi" id="id_prodi" class="form-control">
+                                <option value="">-- Pilih Program Studi --</option>
+                                @foreach($prodi as $p)
+                                    <option value="{{ $p->id_prodi }}" {{ $dosen->id_prodi == $p->id_prodi ? 'selected' : '' }}>{{ $p->nama_prodi }}</option>
+                                @endforeach
+                            </select>
+                            <div class="text-danger">
+                                @error('id_prodi') {{ $message }} @enderror
                             </div>
                         </div>
 

@@ -15,8 +15,8 @@ class DosenController extends Controller
 
     public function index()
     {
-        $data = $this->dosen->allData();
-        return view('v_dosen', compact('data'));
+        $dosen = $this->dosen->allData();
+        return view('v_dosen', compact('dosen'));
     }
 
     public function create()

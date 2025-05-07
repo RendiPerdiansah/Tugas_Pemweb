@@ -21,22 +21,22 @@
 
         <div class="mb-3 text-right">
             <a href="/datadosen/add" class="btn btn-info btn-sm">Add Data</a>
+            <a href="/datadosen/print" target="_blank" class="btn btn-primary btn-sm ml-2">Print</a>
         </div>
 
         <table id="example" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>ID Dosen</th>
-                    <th>NIP</th>
-                    <th>Nama Dosen</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Prodi</th>
-                    <th>Mata Kuliah</th>
-                    <th>Foto</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Dosen</th>
+                        <th>NIP</th>
+                        <th>Nama Dosen</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Prodi</th>
+                        <th>Foto</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
             <tbody>
                 @foreach ($dosen as $index => $item)
                 <tr>
@@ -45,8 +45,8 @@
                     <td>{{ $item->nip }}</td>
                     <td>{{ $item->nama_dosen }}</td>
                     <td>{{ $item->jk_dosen }}</td>
-                    <td>{{ $item->prodi }}</td>
-                    <td>{{ $item->mata_kuliah }}</td>
+                    <td>{{ $item->nama_prodi }}</td>
+                    
                     <td><img src="{{ url('foto_dosen/'.$item->foto_dosen) }}" width="80px"></td>
                     <td>
                         <a href="/datadosen/detail/{{ $item->nip }}" class="btn btn-sm btn-success">Detail</a>
@@ -58,19 +58,18 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>No</th>
-                    <th>ID Dosen</th>
-                    <th>NIP</th>
-                    <th>Nama Dosen</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Prodi</th>
-                    <th>Mata Kuliah</th>
-                    <th>Foto</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Dosen</th>
+                        <th>NIP</th>
+                        <th>Nama Dosen</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Prodi</th>
+                        <th>Foto</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
         </table>
 
         {{-- Modal Delete --}}
