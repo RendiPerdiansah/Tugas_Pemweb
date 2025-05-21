@@ -19,15 +19,15 @@
                     <h3 class="card-title">Form Edit Dosen</h3>
                 </div>
 
-                <form action="/datadosen/update/{{ $dosen->nip }}" method="POST" enctype="multipart/form-data">
+                <form action="/datadosen/update/{{ $dosen->nidn }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input type="text" name="nip" class="form-control" id="nip" placeholder="Masukkan NIP" value="{{ $dosen->nip }}" readonly>
+                            <label for="nidn">NIDN</label>
+                            <input type="text" name="nidn" class="form-control" id="nidn" placeholder="Masukkan NIDN" value="{{ $dosen->nidn }}" readonly>
                             <div class="text-danger">
-                                @error('nip') {{ $message }} @enderror
+                                @error('nidn') {{ $message }} @enderror
                             </div>
                         </div>
 
@@ -39,25 +39,11 @@
                             </div>
                         </div>
 
-                        {{-- Removed Mata Kuliah field as it does not exist --}}
-                        {{--
                         <div class="form-group">
-                            <label for="mata_kuliah">Mata Kuliah</label>
-                            <input type="text" name="mata_kuliah" class="form-control" id="mata_kuliah" placeholder="Masukkan Mata Kuliah" value="{{ $dosen->mata_kuliah }}">
+                            <label for="bidang_keahlian">Bidang Keahlian</label>
+                            <input type="text" name="bidang_keahlian" class="form-control" id="bidang_keahlian" placeholder="Masukkan Bidang Keahlian" value="{{ $dosen->bidang_keahlian }}">
                             <div class="text-danger">
-                                @error('mata_kuliah') {{ $message }} @enderror
-                            </div>
-                        </div>
-                        --}}
-
-                        <div class="form-group">
-                            <label for="jk_dosen">Jenis Kelamin</label>
-                            <select name="jk_dosen" id="jk_dosen" class="form-control">
-                                <option value="Laki-laki" {{ $dosen->jk_dosen == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="Perempuan" {{ $dosen->jk_dosen == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                            </select>
-                            <div class="text-danger">
-                                @error('jk_dosen') {{ $message }} @enderror
+                                @error('bidang_keahlian') {{ $message }} @enderror
                             </div>
                         </div>
 

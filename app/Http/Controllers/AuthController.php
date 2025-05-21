@@ -9,6 +9,10 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function loginPage() {
+        if (auth()->check()) {
+            $user = auth()->user();
+            return redirect()->to($this->redirectByLevel($user->level));
+        }
         return view('v_login');
     }
 

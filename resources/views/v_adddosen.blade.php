@@ -20,36 +20,15 @@
                 <!-- /.card-header -->
 
                 <!-- form start -->
-                <form action="/dosen/insert" method="POST" enctype="multipart/form-data">
+                <form action="/datadosen/insert" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nidn">NIDN</label>
                             <input type="text" name="nidn" class="form-control" id="nidn" 
-                                   placeholder="Masukan NIDN" value="{{ old('nidn') }}">
+                                   placeholder="Masukan NIDN" value="{{ old('nidn') }}" maxlength="10">
                             <div class="text-danger">
                                 @error('nidn')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nidn">NIDN</label>
-                            <input type="text" name="nidn" class="form-control" id="nidn" 
-                                   placeholder="Masukan NIDN" value="{{ old('nidn') }}" maxlength="20">
-                            <div class="text-danger">
-                                @error('nidn')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input type="text" name="nip" class="form-control" id="nip" 
-                                   placeholder="Masukan NIP" value="{{ old('nip') }}" maxlength="16">
-                            <div class="text-danger">
-                                @error('nip')
                                     {{ $message }}
                                 @enderror
                             </div>
@@ -67,14 +46,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="jk_dosen">Jenis Kelamin</label>
-                            <select name="jk_dosen" class="form-control" id="jk_dosen">
-                                <option value="">-- Pilih Jenis Kelamin --</option>
-                                <option value="Laki-laki" {{ old('jk_dosen') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="Perempuan" {{ old('jk_dosen') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                            </select>
+                            <label for="bidang_keahlian">Bidang Keahlian</label>
+                            <input type="text" name="bidang_keahlian" class="form-control" id="bidang_keahlian" 
+                                   placeholder="Masukan Bidang Keahlian" value="{{ old('bidang_keahlian') }}">
                             <div class="text-danger">
-                                @error('jk_dosen')
+                                @error('bidang_keahlian')
                                     {{ $message }}
                                 @enderror
                             </div>

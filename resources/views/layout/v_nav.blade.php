@@ -11,7 +11,7 @@
   <!-- Sidebar User Info -->
 <li class="nav-item text-white text-center mt-3 mb-3">
     <img class="img-profile rounded-circle mb-2" 
-         src="{{ asset('images/default-profile.png') }}" 
+         src="foto_mahasiswa/profile.png" 
          style="width: 50px; height: 50px; object-fit: cover;">
 
     <div style="font-weight: bold;">
@@ -146,7 +146,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
     <li class="nav-item">
-        {{-- <form method="POST" action="{{ route('logout') }}"> --}}
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="nav-link btn btn-link text-left text-white w-100">
                 <i class="fas fa-sign-out-alt"></i>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\M_Dosen;
-use App\Models\M_Jurusan;
 use App\Models\M_Prodi;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\File;
+use App\Models\M_Jurusan;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
 
 class c_dosen extends Controller
 {
@@ -37,11 +38,31 @@ class c_dosen extends Controller
         $prodi = M_Prodi::all();
         return view('v_adddosen', compact('jurusan', 'prodi'));
     }
+    private function generateIdDosen()
+    {
+        $last = DB::table('tb_dosen')->orderBy('id_dosen', 'desc')->first();
+        if (!$last) {
+            return 'DSN001';
+        }
+        $lastNumber = intval(substr($last->id_dosen, 3));
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+        return 'DSN' . $newNumber;
+    }
+
+    private function generateNidn()
+    {
+        do {
+            $nidn = 'NIDN' . rand(100000, 999999);
+        } while (DB::table('tb_dosen')->where('nidn', $nidn)->exists());
+
+        return $nidn;
+    }
+
 
     public function insert(Request $request)
     {
+        
         $request->validate([
-            'nidn' => 'required|unique:tb_dosen,nidn',
             'nip' => 'required|unique:tb_dosen,nip',
             'nama_dosen' => 'required',
             'jk_dosen' => 'required',
@@ -54,9 +75,11 @@ class c_dosen extends Controller
         $file = $request->file('foto_dosen');
         $filename = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path('foto_dosen'), $filename);
-
+        $idDosen = $this->generateIdDosen();
+        $nidn = $this->generateNidn();
         $data = [
-            'nidn' => $request->nidn,
+            'id_dosen' => $idDosen,
+            'nidn' => $nidn,
             'nip' => $request->nip,
             'nama_dosen' => $request->nama_dosen,
             'jk_dosen' => $request->jk_dosen,

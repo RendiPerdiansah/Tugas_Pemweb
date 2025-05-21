@@ -87,14 +87,14 @@
                         <p>Apakah anda yakin ingin menghapus data ini?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <a href="/datadosen/delete/{{ $dosen->nidn }}" class="btn btn-outline-light">Yes</a>
+                        <a href="/datadosen/delete/{{ $data->nidn }}" class="btn btn-outline-light">Yes</a>
                         <button type="button" class="btn btn-outline-light" data-dismiss="modal">No</button>
                     </div>
                 </div>
             </div>
         </div>
         @endforeach
-
+            
     </div>
     <!-- /.card-body -->
 </div>

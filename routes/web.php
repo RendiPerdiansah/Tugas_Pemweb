@@ -67,15 +67,22 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', [c_home::class, 'index']);
 // Route::get('/about', [c_home::class, 'about']);
 // Route::get('/about2/{id}', [c_home::class, 'about2']);
-Route::get('/datadosen', [c_dosen::class, 'index'])->name('dosen');
-Route::get('/datadosen/detail/{id_dosen}', [c_dosen::class, 'detail']);
-Route::get('/datadosen/add', [c_dosen::class, 'add']);
-Route::post('/datadosen/insert', [c_dosen::class, 'insert']);
-Route::post('/dosen/insert', [c_dosen::class, 'insert']);
-Route::get('/datadosen/edit/{id_dosen}', [c_dosen::class, 'edit']);
-Route::post('/datadosen/update/{id_dosen}', [c_dosen::class, 'update']);
-Route::get('/datadosen/delete/{id_dosen}', [c_dosen::class, 'delete']);
+
+
+use App\Http\Controllers\C_Admin;
+Route::get('/datadosen', [C_Admin::class, 'data_dosen'])->name('data_dosen');
+Route::get('/datadosen/detail/{nidn}', [C_Admin::class, 'detail']);
+Route::get('/datadosen/add', [C_Admin::class, 'add']);
+Route::post('/datadosen/insert', [C_Admin::class, 'insert']);
+
+// Route::post('/dosen/insert', [c_dosen::class, 'insert']);
+
+Route::get('/datadosen/edit/{id_dosen}', [C_Admin::class, 'edit']);
+Route::post('/datadosen/update/{id_dosen}', [C_Admin::class, 'update']);
+Route::get('/datadosen/delete/{id_dosen}', [C_Admin::class, 'delete']);
 Route::get('/datadosen/print', [c_dosen::class, 'print']);
+
+
 // Route::get('/user', [c_user::class, 'index']);
 // Route::get('/register', [c_register::class, 'index']);
 // Route::get('/mahasiswa', [c_mahasiswa::class, 'index'])->name('mahasiswa');
@@ -103,7 +110,7 @@ Route::get('/', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'registerPage']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
