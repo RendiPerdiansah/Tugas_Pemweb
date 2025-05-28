@@ -59,7 +59,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            {{-- <tbody>
+            <tbody>
                 @foreach ($detailMahasiswa as $index => $detail)
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -78,7 +78,7 @@
                     </td>
                 </tr>
                 @endforeach
-            </tbody> --}}
+            </tbody>
         </table>
     </div>
 </div>
