@@ -25,6 +25,23 @@
             </div>
         </div>
 
+        <h5>Komposisi Nilai</h5>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <p><strong>Nilai Lain-lain (%):</strong> {{ $nilai->komposisi_nilai_lain }}</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Nilai UTS (%):</strong> {{ $nilai->komposisi_nilai_uts }}</p>
+            </div>
+            <div class="col-md-4">
+                <p><strong>Nilai UAS (%):</strong> {{ $nilai->komposisi_nilai_uas }}</p>
+            </div>
+        </div>
+
+        <div class="card-header">
+
+        <a href="" class="btn btn-primary float-right">Tambah data nilai</a>
+    </div>
         <h5>Rincian Detail Nilai</h5>
         <table class="table table-bordered" id="detailNilaiTable">
             <thead>
@@ -42,7 +59,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach ($detailMahasiswa as $index => $detail)
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -61,7 +78,7 @@
                     </td>
                 </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
     </div>
 </div>
