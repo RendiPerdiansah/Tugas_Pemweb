@@ -68,7 +68,7 @@
 </li>
 @endif
   
-    <!-- Dosen: hanya Admin & Dosen -->
+<!-- Dosen: hanya Admin & Dosen -->
 @if ($level == 1 || $level == 4)
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDosen">
@@ -78,6 +78,21 @@
     <div id="collapseDosen" class="collapse">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ url('datadosen') }}">Dosen</a>
+        </div>
+    </div>
+</li>
+@endif
+
+<!-- Nilai: hanya Admin & Dosen -->
+@if ($level == 1 || $level == 4)
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNilai">
+        <i class="fas fa-fw fa-clipboard-list"></i>
+        <span>Kelola Data Nilai</span>
+    </a>
+    <div id="collapseNilai" class="collapse">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ url('nilai') }}">Nilai</a>
         </div>
     </div>
 </li>

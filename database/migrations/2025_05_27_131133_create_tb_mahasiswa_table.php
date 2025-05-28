@@ -4,7 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('tb_mahasiswa', function (Blueprint $table) {
@@ -14,7 +18,7 @@ return new class extends Migration {
             $table->date('tgl_lahir');
             $table->integer('id_jurusan');
             $table->integer('id_prodi');
-            $table->string('alamat', 255);
+            $table->string('alamat');
             $table->string('agama', 50);
             $table->integer('tingkat');
             $table->integer('semester');
@@ -23,6 +27,9 @@ return new class extends Migration {
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('tb_mahasiswa');

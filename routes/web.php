@@ -82,6 +82,16 @@ Route::post('/datadosen/update/{id_dosen}', [C_Admin::class, 'update']);
 Route::get('/datadosen/delete/{id_dosen}', [C_Admin::class, 'delete']);
 Route::get('/datadosen/print', [c_dosen::class, 'print']);
 
+// Nilai routes
+use App\Http\Controllers\C_Nilai;
+Route::get('/nilai', [C_Nilai::class, 'index'])->name('nilai.index');
+Route::get('/nilai/add', [C_Nilai::class, 'add'])->name('nilai.add');
+Route::post('/nilai/insert', [C_Nilai::class, 'insert'])->name('nilai.insert');
+Route::get('/nilai/edit/{id}', [C_Nilai::class, 'edit'])->name('nilai.edit');
+Route::put('/nilai/update/{id}', [C_Nilai::class, 'update'])->name('nilai.update');
+Route::delete('/nilai/delete/{id}', [C_Nilai::class, 'delete'])->name('nilai.delete');
+Route::get('/nilai/detail/{id}', [C_Nilai::class, 'detail'])->name('nilai.detail');
+
 
 // Route::get('/user', [c_user::class, 'index']);
 // Route::get('/register', [c_register::class, 'index']);
